@@ -5,8 +5,8 @@ on:
     push:
 #     you get a button inside github that allows you to run it
     workflow_dispatch:
-    schedule:
-        - cron:  '*/10 * * * *'
+#     schedule:
+#         - cron:  '*/10 * * * *'
 
 # we add this so that github can change files
 permissions: write-all
