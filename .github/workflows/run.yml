@@ -1,0 +1,27 @@
+#when our code works
+on:
+# it works on three occations
+# on push
+    push:
+#     you get a button inside github that allows you to run it
+    workflow_dispatch:
+    schedule:
+        - cron:  '*/10 * * * *'
+
+# we add this so that github can change files
+permissions: write-all
+
+#what happens when the code runs
+jobs:
+    run:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-python@v4
+            - run: python start.py > data.json
+            - run: |-
+                  git config user.name 'GitHub Actions'
+                  git config user.email 'actions@users.noreply.github.com'
+                  git add -A
+                  git commit -m 'Updates' || exit 0
+                  git push
